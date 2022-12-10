@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1">
+
+    <link href="./public/semantic.min.css" rel="stylesheet">
+    <link href="./public/icon.css" rel="stylesheet">
+    <link href="./public/icon.min.css" rel="stylesheet">
+
+    <title>세종시 전자 도서관</title>
+    <style>
+        /* header문의 style */
+        body {
+            margin: 0 auto;
+        }
+
+        .container {
+            width: 100vw;
+            height: 100vh;
+            background: pink;
+        }
+
+
+
+        h1 {
+            margin: 0 auto;
+            height: 130px;
+            border: 1px solid #253342;
+            position: fixed;
+            width: 1445px;
+            z-index: 9999;
+            background-color: #006f84;
+            top: 0;
+            left: 0;
+            color: white;
+            line-height: 130px;
+            float: left;
+        }
+
+        .menu {
+            float: right;
+            margin: 0 auto;
+        }
+
+        .menu li {
+            float: left;
+            list-style: none;
+        }
+
+        .menu a {
+            height: 143px;
+            border: 1px solid white;
+            line-height: 130px;
+            position: relative;
+            top: -27px;
+            left: 165px;
+            width: 83px;
+            color: white;
+            padding: 0 15px;
+            display: block;
+            font-size: 20px;
+            background-color: gray;
+        }
+
+        .wrapper {
+            width: 1350px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .wrapper .menu {
+            position: relative;
+        }
+
+        .clearfix {
+            content: '';
+            display: block;
+            clear: both;
+        }
+
+        /* card platfrom 위치 맞춰주기 위함. */
+        .card {
+            position: absolute;
+            top: 350px;
+            height: 200px;
+        }
+
+
+        /* items platform 위치 맞춰주기 위함. */
+        .items {
+            width: 1250px;
+            position: absolute;
+            left: 320px;
+            top: 150px;
+            border: 2px solid green;
+        }
+
+        /* header라는 semantic-ui 정렬을 위함 */
+        .header {
+            text-align: center;
+        }
+    </style>
+
+    <script src="./public/jquery-2.1.4.min.js"></script>
+    <script src="./public/semantic.min.js"></script>
+
+    <script>
+        // 버튼 클릭시 이벤트
+        function btn() {
+            alert('대여 완료');
+            user.update_one({ "id": user.id }, { "$inc": { "ava_books": 1 } });
+        }
+    </script>
+
+</head>
+
+<body>
+    <!-- 미리 만들어 둔 header의 뷰 템플릿 가져옴 -->
+    <%- include ('header') %>
+        <!-- 사용자 프로필 화면 -->
+        <div class="ui card">
+            <div class="content">
+                <a class="header">
+                    <%=user.name%>님 반갑습니다.
+                </a>
+                <div class="meta">
+                    <span class="date">직업 : <%=user.job%> 나이 : <%=user.age%> </span>
+                </div>
+                <div class="description">
+                    세종시 전자도서 홈페이지에 오신걸 환영합니다.
+                </div>
+            </div>
+            <div class="extra content">
+                <a>
+                    <i class="book icon"></i>
+                    <p>남은 전자책 대여 가능 권 수 : <%= user.ava_book%>
+                    </p><br>
+                    <h3><a href="/logout" class="ui fluid large teal submit button">로그아웃</a></h3>
+                </a>
+            </div>
+        </div>
+
+        <!-- 전자 도서 페이지 -->
+        <div class="ui divided items">
+            <h2 class="ui header">
+                <i class="thumbs up icon"></i>
+                <div class="content">
+                    2021년 베스트셀러 TOP 5
+                    <div class="sub header">지금 바로 베스트셀러를 만나보세요!</div>
+                </div>
+            </h2>
+            <div class="item">
+                <div class="image">
+                    <img src="https://search.pstatic.net/common?type=a&size=100&quality=90&direct=true&src=https%3A%2F%2Fbookthumb-phinf.pstatic.net%2Fcover%2F209%2F372%2F20937219.jpg%3Ftype%3Dm140%26udate%3D20211019"
+                        style="width : 140px; height:100px;">
+                </div>
+                <div class="content">
+                    <a class="header">트렌드 코리아 2022, 김난도, 이준형, 이향은</a>
+                    <div class="meta">
+                        <span class="cinema">출판사 { 미래의 창 }</span>
+                    </div>
+                    <div class="description">
+                        <p></p>
+                    </div>
+                    <div class="extra">
+                        <!-- 대여가능 권수가 1권 이상있을 때, 버튼 활성화 -->
+                        <%if( user.ava_book> 0)
+                            {%>
+                            <div><button onclick="javascript:btn()" class="ui right floated primary button">
+                                    대여하기
+                                    <i class="right chevron icon"></i>
+                                </button>
+                            </div>
+                            <%} <!-- 대여가능 권수가 0권 일 때, 버튼 비활성화 -->
+                                else {%>
+                                <div class="ui right floated disabled button">
+                                    대여 불가능
+                                </div>
+                                <%}%>
+
+                                    <div class="ui label">경제/경영</div>
+                                    <div class="ui label"><i class="globe icon"></i> Additional Languages</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="item">
+                <div class="image">
+                    <img src="https://search.pstatic.net/common?type=a&size=100&quality=90&direct=true&src=https%3A%2F%2Fbookthumb-phinf.pstatic.net%2Fcover%2F196%2F181%2F19618143.jpg%3Ftype%3Dm140%26udate%3D20211127"
+                        style="width : 140px; height:100px;">
+                </div>
+                <div class="content">
+                    <a class="header">소크라테스 익스프레스, 에릭 와이너</a>
+                    <div class="meta">
+                        <span class="cinema">출판사 { 어크로스 } </span>
+                    </div>
+                    <div class="description">
+                        <p></p>
+                    </div>
+                    <div class="extra">
+                        <!-- 대여가능 권수가 1권 이상있을 때, 버튼 활성화 -->
+                        <%if( user.ava_book> 0)
+                            {%>
+                            <div><button onclick="javascript:btn()" class="ui right floated primary button">
+                                    대여하기
+                                    <i class="right chevron icon"></i>
+                                </button>
+                            </div>
+                            <%} <!-- 대여가능 권수가 0권 일 때, 버튼 비활성화 -->
+                                else {%>
+                                <div class="ui right floated disabled button">
+                                    대여 불가능
+                                </div>
+                                <%}%>
+                                    <div class="ui label">인문, 서양철학</div>
+                                    <div class="ui label"><i class="globe icon"></i> Additional Languages</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="item">
+                <div class="image">
+                    <img src="https://search.pstatic.net/common?type=a&size=100&quality=90&direct=true&src=https%3A%2F%2Fbookthumb-phinf.pstatic.net%2Fcover%2F211%2F540%2F21154031.jpg%3Ftype%3Dm140%26udate%3D20211207"
+                        style="width : 140px; height:100px;">
+                </div>
+                <div class="content">
+                    <a class="header">거꾸로 읽는 세계사, 유시민</a>
+                    <div class="meta">
+                        <span class="cinema">출판사 : { 돌베개 }</span>
+                    </div>
+                    <div class="description">
+                        <p></p>
+                    </div>
+                    <div class="extra">
+                        <!-- 대여가능 권수가 1권 이상있을 때, 버튼 활성화 -->
+                        <%if( user.ava_book> 0)
+                            {%>
+                            <div><button onclick="javascript:btn()" class="ui right floated primary button">
+                                    대여하기
+                                    <i class="right chevron icon"></i>
+                                </button>
+                            </div>
+                            <%} <!-- 대여가능 권수가 0권 일 때, 버튼 비활성화 -->
+                                else {%>
+                                <div class="ui right floated disabled button">
+                                    대여 불가능
+                                </div>
+                                <%}%>
+                                    <div class="ui label">세계사</div>
+                                    <div class="ui label"><i class="globe icon"></i> Additional Languages</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="item">
+                <div class="image">
+                    <img src="https://search.pstatic.net/common?type=a&size=100&quality=90&direct=true&src=https%3A%2F%2Fbookthumb-phinf.pstatic.net%2Fcover%2F189%2F260%2F18926010.jpg%3Ftype%3Dm140%26udate%3D20211215"
+                        style="width : 140px; height:100px;">
+                </div>
+                <div class="content">
+                    <a class="header">불편한 편의점, 김호연</a>
+                    <div class="meta">
+                        <span class="cinema">출판사 : { 나무옆의자 }</span>
+                    </div>
+                    <div class="description">
+                        <p></p>
+                    </div>
+                    <div class="extra">
+                        <!-- 대여가능 권수가 1권 이상있을 때, 버튼 활성화 -->
+                        <%if( user.ava_book> 0)
+                            {%>
+                            <div><button onclick="javascript:btn()" class="ui right floated primary button">
+                                    대여하기
+                                    <i class="right chevron icon"></i>
+                                </button>
+                            </div>
+                            <%} <!-- 대여가능 권수가 0권 일 때, 버튼 비활성화 -->
+                                else {%>
+                                <div class="ui right floated disabled button">
+                                    대여 불가능
+                                </div>
+                                <%}%>
+
+                                    <div class="ui label">소설</div>
+                                    <div class="ui label"><i class="globe icon"></i> Additional Languages</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="item">
+                <div class="image">
+                    <img src="https://search.pstatic.net/common?type=a&size=100&quality=90&direct=true&src=https%3A%2F%2Fbookthumb-phinf.pstatic.net%2Fcover%2F188%2F282%2F18828218.jpg%3Ftype%3Dm140%26udate%3D20211203"
+                        style="width : 140px; height:100px;">
+                </div>
+                <div class="content">
+                    <a class="header">작은 별이지만 빛나고 있어, 소윤</a>
+                    <div class="meta">
+                        <span class="cinema">출판사 : { 북로망스 }</span>
+                    </div>
+                    <div class="description">
+                        <p></p>
+                    </div>
+                    <div class="extra">
+                        <!-- 대여가능 권수가 1권 이상있을 때, 버튼 활성화 -->
+                        <%if( user.ava_book> 0)
+                            {%>
+                            <div><button onclick="javascript:btn()" class="ui right floated primary button">
+                                    대여하기
+                                    <i class="right chevron icon"></i>
+                                </button>
+                            </div>
+                            <%} <!-- 대여가능 권수가 0권 일 때, 버튼 비활성화 -->
+                                else {%>
+                                <div class="ui right floated disabled button">
+                                    대여 불가능
+                                </div>
+                                <%}%>
+
+                                    <div class="ui label">시/에세이</div>
+                                    <div class="ui label"><i class="globe icon"></i> Additional Languages</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+</body>
+
+</html>

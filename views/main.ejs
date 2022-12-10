@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, height=device-height, initial-scale=1">
+
+	<link href="./public/semantic.min.css" rel="stylesheet">
+	<link href="./public/icon.css" rel="stylesheet">
+	<link href="./public/icon.min.css" rel="stylesheet">
+
+	<title>세종시 전자 도서관</title>
+	<style>
+		/* header문의 style */
+		body {
+			margin: 0 auto;
+		}
+
+		.container {
+			width: 100vw;
+			height: 100vh;
+			background: pink;
+		}
+
+
+
+		h1 {
+			margin: 0 auto;
+			height: 130px;
+			border: 1px solid #253342;
+			position: fixed;
+			width: 1445px;
+			z-index: 9999;
+			background-color: #006f84;
+			top: 0;
+			left: 0;
+			color: white;
+			line-height: 130px;
+			float: left;
+		}
+
+		.menu {
+			float: right;
+			margin: 0 auto;
+		}
+
+		.menu li {
+			float: left;
+			list-style: none;
+		}
+
+		.menu a {
+			height: 143px;
+			border: 1px solid white;
+			line-height: 130px;
+			position: relative;
+			top: -28px;
+			left: 165px;
+			width: 83px;
+			color: white;
+			padding: 0 15px;
+			display: block;
+			font-size: 20px;
+			background-color: gray;
+		}
+
+		.wrapper {
+			width: 1350px;
+			margin: 0 auto;
+			position: relative;
+		}
+
+		.wrapper .menu {
+			position: relative;
+		}
+
+		.clearfix {
+			content: '';
+			display: block;
+			clear: both;
+		}
+
+
+		/* 안내 문구 크기 수정 */
+		.segment {
+			height: 600px;
+			position: absolute;
+			width: 1000px;
+			top: 170px;
+			left: 320px;
+			text-align: center;
+		}
+	</style>
+
+	<script src="./public/jquery-2.1.4.min.js"></script>
+	<script src="./public/semantic.min.js"></script>
+
+</head>
+
+<body>
+	<!-- 미리 만들어 둔 header의 뷰 템플릿 가져옴 -->
+	<%- include ('header') %>
+		<div class="ui segment">
+			<img class="ui centered medium image" src="https://cdn.msejong.com/news/photo/201804/8465_8477_4340.png">
+			<h3>
+				<p>세종시 전자 도서관에 오신 것을 환영합니다!!</p>
+			</h3><br>
+			<h3>
+				<p>회원 가입을 하시면 더 많은 혜택을 누릴 수 있습니다.</p>
+			</h3><br>
+			<p>세종특별 자치시 조치원읍 세종로 2511에 위치한, 고려대학교 세종캠퍼스와 세종시가 함께 운영하는 전자 도서관입니다.</p><br>
+			<p>연락처 : 044-860-1802, 팩스 : 044-860-1810</p><br><br><br>
+			<div>
+				<a href="/login" class="ui fluid large black submit button">로그인 페이지로 이동</a>
+			</div>
+		</div>
+</body>
+
+</html>

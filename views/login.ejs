@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1">
+
+    <link href="./public/semantic.min.css" rel="stylesheet">
+    <link href="./public/icon.css" rel="stylesheet">
+    <link href="./public/icon.min.css" rel="stylesheet">
+
+    <title>세종 전자 도서관</title>
+
+    <style>
+        /* header문의 style */
+        body {
+            margin: 0 auto;
+        }
+
+        .container {
+            width: 100vw;
+            height: 100vh;
+            background: pink;
+        }
+
+
+
+        h1 {
+            margin: 0 auto;
+            height: 130px;
+            border: 1px solid #253342;
+            position: fixed;
+            width: 1445px;
+            z-index: 9999;
+            background-color: #006f84;
+            top: 0;
+            left: 0;
+            color: white;
+            line-height: 130px;
+            float: left;
+        }
+
+        .menu {
+            float: right;
+            margin: 0 auto;
+        }
+
+        .menu li {
+            float: left;
+            list-style: none;
+        }
+
+        .menu a {
+            height: 143px;
+            border: 1px solid white;
+            line-height: 130px;
+            position: relative;
+            top: 0;
+            left: 165px;
+            width: 83px;
+            color: white;
+            padding: 0 15px;
+            display: block;
+            font-size: 20px;
+            background-color: gray;
+        }
+
+        .wrapper {
+            width: 1350px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .wrapper .menu {
+            position: relative;
+        }
+
+        .clearfix {
+            content: '';
+            display: block;
+            clear: both;
+        }
+
+
+        /* 로그인폼의 스타일 */
+        body>.grid {
+            height: 100%;
+        }
+
+        .image {
+            margin-top: -100px;
+        }
+
+        .column {
+            max-width: 450px;
+        }
+    </style>
+
+    <script src="./public/jquery-2.1.4.min.js"></script>
+    <script src="./public/semantic.min.js"></script>
+
+</head>
+
+<body>
+    <!-- 미리 만들어 둔 header의 뷰 템플릿 가져옴 -->
+    <%- include ('header') %>
+        <div class="ui middle aligned center aligned grid">
+            <div class="column">
+                <h2 class="ui image header">
+                    <div class="content">
+                        세종 전자 도서 로그인
+                    </div>
+                </h2>
+                <!-- 인증 처리 후 메시지가 있으면 메시지 표시 -->
+                <div class="ui warning message">
+                    <i class="close icon"></i>
+                    <% if(message.length> 0){%>
+                        <div class="header">
+                            로그인에 실패하였습니다.<br>
+                            <%=message %>
+                        </div>
+                        <%}%>
+                </div>
+
+                <form action="/login" method="post" class="ui large form">
+                    <div class="ui stacked secondary  segment">
+                        <div class="field">
+                            <div class="ui left icon input">
+                                <i class="user icon"></i>
+                                <input type="text" name="id" placeholder="ID를 입력해주세요.">
+                            </div>
+                        </div>
+                        <div class="field">
+                            <div class="ui left icon input">
+                                <i class="lock icon"></i>
+                                <input type="password" name="password" placeholder="비밀번호를 입력해주세요.">
+                            </div>
+                        </div>
+                        <div>
+                            <input type="submit" class="ui fluid large teal submit button" value="로그인" name="">
+                        </div>
+                    </div>
+
+                    <div class="ui error message"></div>
+
+                </form>
+
+                <div class="ui message">
+                    처음 오셨나요? <a href="/signup">회원가입</a>
+                </div>
+            </div>
+        </div>
+</body>
+
+</html>
